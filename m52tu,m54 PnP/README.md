@@ -33,15 +33,6 @@ EasyEda project link for the PCB: https://easyeda.com/pazi88/ms42-43-compatible-
 - Exhaust CAM vanos solenoid is wired to output pin 37, and it can be controlled by VVT control.
 - Fan output pin is 36 and it's only wired to external connector fan output in the back of the ecu. The stock ecu connector fan output is controlled by bluepill in
   PWM fashion to be able to control stock fan.
-### Rev 1.4 and older
-- Output pin 35 is wired to the electric thermostat. With help of programmable outputs the electric thermostat can be used to control engine temps.
-  For exmaple make output activate when coolant is about 90°C and that should make the engine temps stay at 90°C instead of 100°C based on mechanical thermostat.
-  Also you can add second condition to only do that above 80kPa to only lower temps at higher loads like stock ecu does.
-- DISA valve is wired to the output pin 37, and it can be used by programmable outputs.
-- Exhaust CAM vanos solenoid is wired to output pin 36, and it can be controlled by VVT control.
-- Default FAN output is wired to stock FAN output on the board and in addition to that, to the external connector. Note that stock FAN is PWM type and can't be
-  controlled.
-### Common in all versions
 - The stock oil temp and radiator outlet temp sensors are also wired in by default, so those can be monitored using local aux in channels. Just solder JP3 and JP4
   to pull-up configuration(1-2) in CORE4 and those spare adc inputs work to monitor the oil and coolant outlet temps. (TBD: TS configuration instructions)
   Pin A13 is oil temp and pin A14 is coolant outlet temp.
@@ -56,15 +47,12 @@ EasyEda project link for the PCB: https://easyeda.com/pazi88/ms42-43-compatible-
 
 ## Speeduino code for Core4
 
-The rev1.0/1.1 PCBs can use Speeduino FW without any changes.
-Recommended way is to use Speedyloader to upload the Firmware to CORE4: https://wiki.speeduino.com/en/Installing_Firmware 
 
 Rev1.2 onwards allows 6-cyl sequential injection and in order to run 6 cyl sequential, speeduino FW needs few customizations.
 To upload use XLoader instead of Speedyloader: https://www.hobbytronics.co.uk/arduino-xloader Custom FW hex can be found from here: https://github.com/pazi88/Speeduino-M5x-PCBs/tree/master/6-cyl%20firmware%20files
 Remember to select ATMEGA2560 as device. Also manual compiling and upload is option. To do that, check: https://github.com/pazi88/Speeduino-M5x-PCBs/tree/master/m52tu,m54%20PnP#compiling-speeduino-code-by-yourself
 
-It's also recommended to change number of fuel outputs to 6 instead of 4 in speeduino.ini -file for Core4. But this isn't mandatory. It just gets rid of the possible
-warnings in TS and allows to use HW test mode for injectors 5 and 6.
+
 
 ### Compiling speeduino code by yourself
 
@@ -72,6 +60,9 @@ If you want, you can also manually compile and upload the custom 6-cyl sequentia
 Before compiling, change number of INJ_CHANNELS to 6 and number of IGN_CHANNELS to 3 in globals.h file:
 
 ![alt text](https://pazi88.kuvat.fi/kuvat/Projektikuvat/Random%20projektit/speeduino/Settings.png?img=smaller)
+
+It's also recommended to change number of fuel outputs to 6 instead of 4 in speeduino.ini -file for Core4. But this isn't mandatory. It just gets rid of the possible
+warnings in TS and allows to use HW test mode for injectors 5 and 6.
 
 ## Set solder jumpers for Core4
 
